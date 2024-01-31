@@ -1,6 +1,6 @@
 !home/
 home/**
-!home/.bashrc
+!home/.gitkeep
 
 .DS_Store
 .vagrant*
