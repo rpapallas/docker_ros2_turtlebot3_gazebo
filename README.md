@@ -6,11 +6,13 @@ You can pull the image from Docker Hub at
 
 To help with managing the container, you can make use of the Makefile I prepared:
 
-* `make pull` will pull the image for either ARM or AMD64.
-* `make build` will build the image locally from the `Dockerfile`.
-* `make run-mac` will run it on macOS.
-* `make run-windows` will run it on Windows.
-* `make run-linux` will run it on Linux (although we suggest Singularity/Apptainer for Linux).
+* Getting the image:
+    * `make pull` will pull the image for either ARM or AMD64.
+    * or use `make build` to build the image locally from the `Dockerfile`.
+* Running:
+    * `make run-mac` will run it on macOS.
+    * `make run-windows` will run it on Windows.
+    * `make run-linux` will run it on Linux (although we suggest Singularity/Apptainer for Linux).
 
 I have only tested this with macOS (Apple Silicon; M1) and Linux (AMD64). Not
 tested on Windows. Currently with Arm there is an issue with robot's LiDAR sensor.
