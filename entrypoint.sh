@@ -339,27 +339,46 @@ Name[uk]=Відкрити нове вікно у потайливому режи
 Name[zh_TW]=開啟新隱私瀏覽視窗
 Exec=firefox -private-window
 EOF
-cat << EOF > $HOME/Desktop/codium.desktop
+cat << EOF > $HOME/Desktop/code.desktop
 [Desktop Entry]
-Name=VSCodium
+Name=Visual Studio Code
 Comment=Code Editing. Redefined.
 GenericName=Text Editor
-Exec=/usr/share/codium/codium --unity-launch %F
-Icon=vscodium
+Exec=/usr/share/code/code --unity-launch %F
+Icon=/usr/share/code/resources/app/resources/linux/code.png
 Type=Application
 StartupNotify=false
-StartupWMClass=VSCodium
+StartupWMClass=Code
 Categories=TextEditor;Development;IDE;
-MimeType=text/plain;inode/directory;application/x-codium-workspace;
+MimeType=text/plain;inode/directory;application/x-code-workspace;
 Actions=new-empty-window;
 Keywords=vscode;
 
 [Desktop Action new-empty-window]
 Name=New Empty Window
-Exec=/usr/share/codium/codium --new-window %F
-Icon=vscodium
+Exec=/usr/share/code/code --new-window %F
+Icon=/usr/share/code/resources/app/resources/linux/code.png
 EOF
 chown -R $USER:$USER $HOME/Desktop
+
+
+# COMP3631 related things
+
+if [ ! -d "$HOME/ros2_ws/src" ]; then
+    mkdir -p "$HOME/ros2_ws/src"
+fi
+
+if [ ! -d "$HOME/ros2_ws/src/turtlebot3_simulations" ]; then
+    git clone https://github.com/COMP3631/turtlebot3_simulations $HOME/ros2_ws/src/turtlebot3_simulations
+fi
+
+# Certain packages needed only for Apple Silicon / Arm-based machines.
+architecture=$(uname -m)
+if [[ "$architecture" == arm* ]] || [[ "$architecture" == aarch* ]]; then
+    if [ ! -d "$HOME/ros2_ws/src/gazebo_ros_pkgs" ]; then
+        git clone https://github.com/ros-simulation/gazebo_ros_pkgs -b ros2 $HOME/ros2_ws/src/gazebo_ros_pkgs
+    fi
+fi
 
 # clearup
 PASSWORD=

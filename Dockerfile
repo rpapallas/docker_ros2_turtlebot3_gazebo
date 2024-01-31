@@ -52,6 +52,16 @@ RUN apt install -yq libgazebo-dev ros-humble-camera-info-manager
 RUN apt install -yq ros-humble-gazebo* ros-humble-desktop python3-rosdep libpython3-dev ros-dev-tools python3-argcomplete
 RUN sed -i 's/robot_model_type: "differential"/robot_model_type: "nav2_amcl::DifferentialMotionModel"/' /opt/ros/humble/share/turtlebot3_navigation2/param/burger.yaml
 
+# Install VS Code
+RUN apt install -yq software-properties-common apt-transport-https wget
+RUN wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
+RUN add-apt-repository -y "deb [arch=$(dpkg --print-architecture)] https://packages.microsoft.com/repos/code stable main"
+RUN DEBIAN_FRONTEND=noninteractive apt update && apt install -yq code
+
+# Install NeoVim
+RUN add-apt-repository -y ppa:neovim-ppa/unstable
+RUN DEBIAN_FRONTEND=noninteractive apt update && apt install -yq neovim
+
 COPY ./entrypoint.sh /
 ENTRYPOINT [ "/bin/bash", "-c", "/entrypoint.sh" ]
 
