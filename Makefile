@@ -3,6 +3,10 @@
 build:
 	docker build -t ros2-humble .
 
+push:
+	docker push rpapallas/ros2-humble-turtlebot3-gazebo-vnc
+
+
 docker-run:
 	@docker run \
 		-p 6080:80 \

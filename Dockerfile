@@ -52,4 +52,8 @@ RUN apt install -yq libgazebo-dev ros-humble-camera-info-manager
 RUN apt install -yq ros-humble-gazebo* ros-humble-desktop python3-rosdep libpython3-dev ros-dev-tools python3-argcomplete
 RUN sed -i 's/robot_model_type: "differential"/robot_model_type: "nav2_amcl::DifferentialMotionModel"/' /opt/ros/humble/share/turtlebot3_navigation2/param/burger.yaml
 
-RUN rm -rf /var/lib/apt/lists/*
+COPY ./entrypoint.sh /
+ENTRYPOINT [ "/bin/bash", "-c", "/entrypoint.sh" ]
+
+ENV USER ubuntu
+ENV PASSWD ubuntu
