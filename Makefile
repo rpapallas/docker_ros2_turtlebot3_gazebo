@@ -1,4 +1,4 @@
-.PHONY: build docker-run run-mac run-linux pull
+.PHONY: build docker-run run-mac run-linux run-windows pull
 
 pull:
 	docker image pull rpapallas/ros2-humble-turtlebot3-gazebo-vnc
