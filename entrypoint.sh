@@ -74,7 +74,7 @@ add_line_if_not_exist() {
 BASHRC_PATH=$HOME/.bashrc
 
 lines_to_add=(
-    'source /opt/ros/$ROS_DISTRO/setup.bash'
+    "source /opt/ros/$ROS_DISTRO/setup.bash"
     'source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash'
     '. /usr/share/gazebo/setup.sh'
     'if [ -d $HOME/ros2_ws/install/ ]; then'
@@ -379,6 +379,8 @@ if [[ "$architecture" == arm* ]] || [[ "$architecture" == aarch* ]]; then
         git clone https://github.com/ros-simulation/gazebo_ros_pkgs -b ros2 $HOME/ros2_ws/src/gazebo_ros_pkgs
     fi
 fi
+
+chown -R $USER:$USER $HOME/ros2_ws/src
 
 # clearup
 PASSWORD=
